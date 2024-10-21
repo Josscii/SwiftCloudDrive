@@ -89,7 +89,7 @@ public final class CloudDrive: @unchecked Sendable {
             self.rootDirectory = containerURL.appendingPathComponent(relativePathToRoot, isDirectory: true)
             self.metadataMonitor = MetadataMonitor(rootDirectory: self.rootDirectory)
         case let .localDirectory(rootURL):
-            self.rootDirectory = URL(fileURLWithPath: relativePathToRoot, isDirectory: true, relativeTo: rootURL)
+            self.rootDirectory = rootURL.appendingPathComponent(relativePathToRoot, isDirectory: true)
             try fileManager.createDirectory(atPath: self.rootDirectory.path, withIntermediateDirectories: true)
             self.metadataMonitor = nil
         }
