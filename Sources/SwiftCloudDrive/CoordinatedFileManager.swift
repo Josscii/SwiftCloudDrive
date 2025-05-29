@@ -49,6 +49,12 @@ public actor CoordinatedFileManager {
         }
     }
     
+    public func moveItem(coordinatingAccessFrom fromURL: URL, to toURL: URL) throws {
+        try coordinate(readingItemAt: fromURL, readOptions: [], writingItemAt: toURL, writeOptions: .forReplacing) { readURL, writeURL in
+            try fileManager.moveItem(at: readURL, to: writeURL)
+        }
+    }
+    
     public func contentsOfDirectory(coordinatingAccessAt dirURL: URL, includingPropertiesForKeys keys: [URLResourceKey]?, options mask: FileManager.DirectoryEnumerationOptions) throws -> [URL] {
         var contentsURLs: [URL] = []
         try coordinate(readingItemAt: dirURL) { [self] url in

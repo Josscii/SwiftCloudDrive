@@ -219,6 +219,15 @@ public final class CloudDrive: @unchecked Sendable {
         try await coordinatedFileManager.copyItem(coordinatingAccessFrom: sourceURL, to: destinationURL)
     }
     
+    /// Moves within the container.
+    public func move(from source: RootRelativePath, to destination: RootRelativePath) async throws {
+        guard isConnected else { throw Error.queriedWhileNotConnected }
+        let coordinatedFileManager = CoordinatedFileManager(presenter: fileMonitor)
+        let sourceURL = try source.fileURL(forRoot: rootDirectory)
+        let destinationURL = try destination.fileURL(forRoot: rootDirectory)
+        try await coordinatedFileManager.moveItem(coordinatingAccessFrom: sourceURL, to: destinationURL)
+    }
+    
     /// Reads the contents of a file in the cloud, returning it as data.
     public func readFile(at path: RootRelativePath) async throws -> Data {
         guard isConnected else { throw Error.queriedWhileNotConnected }
