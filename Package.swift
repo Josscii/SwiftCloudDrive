@@ -28,5 +28,4 @@ let package = Package(
             name: "SwiftCloudDriveTests",
             dependencies: ["SwiftCloudDrive"]),
     ],
-    swiftLanguageModes: [.v5,.v6]
-)
+    swiftLanguageModes: [.v5])
